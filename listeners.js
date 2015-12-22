@@ -4,8 +4,10 @@
 function hostLounge(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in hostLounge: ${JSON.stringify(data, null, 2)}`);
+
     global.Lounges[data.userId] = data;
     global.Lounges[data.userId].socket = ws;
+    global.Lounges[data.userId].clientIds = [];
     ws.userId = data.userId;
 }
 
@@ -13,6 +15,7 @@ function hostLounge(ws, data) {
 function unhostLounge(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in unhostLounge: ${JSON.stringify(data, null, 2)}`);
+
     var message = {
         action: "kickJoiner",
         data: { }
@@ -26,8 +29,11 @@ function unhostLounge(ws, data) {
 function joinLounge(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in joinLounge: ${JSON.stringify(data, null, 2)}`);
-    if(!global.Lounges[data.hostId].clientIds)
-        global.Lounges[data.hostId].clientIds = [];
+
+    global.Lounges[data.userId] = data;
+    global.Lounges[data.userId].socket = ws;
+    ws.userId = data.userId;
+
     global.Lounges[data.hostId].clientIds.push(data.userId);
     requestHostInfo(ws, data);
 }
@@ -36,6 +42,7 @@ function joinLounge(ws, data) {
 function requestHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in requestHostInfo: ${JSON.stringify(data, null, 2)}`);
+    
     var message = {
         action: "requestHostInfo",
         data: { }
@@ -47,6 +54,7 @@ function requestHostInfo(ws, data) {
 function sendHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in sendHostInfo: ${JSON.stringify(data, null, 2)}`);
+
     var json = {
         action: "sendHostInfo",
         data: data
