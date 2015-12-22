@@ -77,14 +77,21 @@ var JSON = {
 }
 ```
 
-##### Update joiner (server → client)
-Update the joiner with information necessary to play the current lounge's song in sync
+##### Kick Joiner (server → client)
+Remove the list of joiners in a lounge (as a result of host leaving their lounge)
 ```javascript
 var JSON = {
-    action: "updateJoiner",
-    data: {
-        ( ??? )
-    }
+    action: "kickJoiner",
+    data: { }
+}
+```
+
+##### Request Host Info (server → client)
+Request information from the host necessary to play the lounge's current song
+```javascript
+var JSON = {
+    action: "requestHostInfo",
+    data: { }
 }
 ```
 
@@ -97,6 +104,7 @@ var JSON = {
     action: "joinLounge",
     data: {
         hostName: "",
+        hostId: "",
         userId: ""
     }
 }
