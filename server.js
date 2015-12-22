@@ -16,12 +16,11 @@ ws.on('connection', ws => {
     ws.on('message', json => {
         console.log(`Received message from the client: ${json}`);
     });
-});
 
-ws.on('close', () => {
-    console.log('Client disconnected from the server!');
+    ws.on('close', () => {
+        console.log('Client disconnected from the server!');
+    });
 });
-
 server.on('request', app);
 server.listen(1337, () => {
     console.log('🌏  Server listening on port 1337');
