@@ -8,14 +8,34 @@ function hostLounge(ws, data) {
 
 function unhostLounge(ws, data) {
     console.log(`--> in unhostLounge: ${JSON.stringify(data, null, 2)}`);
+    var message = {
+        action: "kickJoiner",
+        data: { }
+    };
+    broadcast(global.Lounges[data.userId].clientIds, message);
+    delete global.Lounges[data.userId];
 }
 
 function updateJoiner(ws, data) {
     console.log(`--> in updateJoiner: ${JSON.stringify(data, null, 2)}`);
 }
 
+function sendHostInfo(ws, data) {
+    console.log(`--> in sendHostInfo: ${JSON.stringify(data, null, 2)}`);
+    var message = {
+        action: "requestHostInfo",
+        data: { }
+    }
+    ws.send(message);
+}
+
+// Add the joiner name to the list of clients in their desired host's current 
+// lounge and request for the lounge information
 function joinLounge(ws, data) {
     console.log(`--> in joinLounge: ${JSON.stringify(data, null, 2)}`);
+    if(!global.Lounges[data.hostId].clientIds)
+        global.Lounges[data.hostId].clientIds = [];
+    global.Lounges[data.hostId].clientIds.push(data.userId);
 }
 
 function leaveLounge(ws, data) {
