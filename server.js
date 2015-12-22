@@ -13,16 +13,13 @@ app.use((req, res) => {
 ws.on('connection', ws => {
     console.log('Client connected to server!');
 
-    ws.on('open', () => {
-        console.log('Websocket connected');
-        ws.send('hi :>');
-    });
-
-    ws.on('message', data => {
+    ws.on('message', json => {
         console.log('Received message from the client: '+data);
     });
+});
 
-    ws.send('sup');
+ws.on('disconnection', () => {
+    console.log('Client disconnected from the server!');
 });
 
 server.on('request', app);
