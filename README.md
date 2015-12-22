@@ -23,6 +23,8 @@ var JSON = {
         streamURL: "",
         songName: "",
         timestamp: "",
+        hostTime: "",
+        songImage: "",
         currentLoungeId: "",
         currentLoungeName: ""
     }
