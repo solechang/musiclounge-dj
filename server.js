@@ -23,9 +23,10 @@ ws.on('connection', ws => {
 
     // Listener to handle incoming client messages
     ws.on('message', message => {
-        console.log(`Received: ${JSON.stringify(message, null, 2)}`);
-        var data = JSON.parse(message.data);
-        actions[message.action](data);
+        var json = JSON.parse(message);
+        var data = JSON.parse(json.data);
+        console.log(`json: ${json}\ndata: ${data}`);
+        actions[json.action](data);
     });
 
     // Listener to handle a client disconnection
