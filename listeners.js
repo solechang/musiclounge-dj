@@ -47,7 +47,7 @@ function requestHostInfo(ws, data) {
         action: "requestHostInfo",
         data: { }
     }
-    ws.send(message);
+    ws.send(JSON.stringify(message));
 }
 
 // The host will send the lounge and current song information to the joiner
@@ -66,7 +66,7 @@ function sendHostInfo(ws, data) {
 function processHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in processHostInfo`);
-    ws.send(data);
+    ws.send(JSON.stringify(data));
 }
 
 // Remove the joiner name from the list of clients in the joined host's current lounge
