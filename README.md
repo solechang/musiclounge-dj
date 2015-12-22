@@ -1,7 +1,20 @@
 # MusicLounge-DJ
+---
+## JSON Message Protocol (GENERAL)
+
+### Error (server ➢ client)
+```javascript
+var JSON = {
+    type: "error",
+    data: {
+        message: ""
+    }
+}
+```
 
 ## JSON Message Protocol (HOST)
-### Host a Lounge
+
+### Host a Lounge (client ➢ server)
 ```javascript
 var JSON = {
     type: "hostLounge",
@@ -18,8 +31,9 @@ var JSON = {
 
 ```
 
-## JSON Message Protocol (CLIENT)
-### Join a Lounge
+## JSON Message Protocol (JOINER)
+
+### Join a Lounge (client ➢ server)
 ```javascript
 var JSON = {
     type: "joinLounge",
