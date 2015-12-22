@@ -32,6 +32,7 @@ socketServer.on('connection', ws => {
     // Listener to handle a client disconnection
     ws.on('close', () => {
         console.log('Client disconnected from the server!');
+        delete global.Lounges[ws.userId];
     });
 });
 
