@@ -68,7 +68,7 @@ function sendHostInfo(ws, data) {
 function processHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log(`--> in processHostInfo`);
-    global.Lounges[data.joinerId].socket.send(JSON.stringify(data));
+    global.Lounges[data.data.joinerId].socket.send(JSON.stringify(data));
 }
 
 // Remove the joiner name from the list of clients in the joined host's current lounge
