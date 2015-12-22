@@ -86,14 +86,12 @@ var JSON = {
 }
 ```
 
-##### Update joiner (server → client)
-Update the joiner with information necessary to play the current lounge's song in sync
+##### Request Host Info (server → client)
+Request information from the host necessary to play the lounge's current song
 ```javascript
 var JSON = {
-    action: "updateJoiner",
-    data: {
-        ( ??? )
-    }
+    action: "requestHostInfo",
+    data: { }
 }
 ```
 
