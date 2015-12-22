@@ -11,7 +11,7 @@ app.use((req, res) => {
 
 // Instantiate listeners upon a websocket connection 
 ws.on('connection', ws => {
-    console.log('Server is connected');
+    console.log('Client connected to server!');
 
     ws.on('open', () => {
         console.log('Websocket connected');
@@ -21,6 +21,8 @@ ws.on('connection', ws => {
     ws.on('message', data => {
         console.log('Received message from the client: '+data);
     });
+
+    ws.send('sup');
 });
 
 server.on('request', app);
