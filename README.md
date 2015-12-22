@@ -11,7 +11,7 @@ var Lounges = {
         songName : "Whatever",
         songImage : "www.etc.com/img",
         clientIds : ["13f1143", "12f123", "f311123"],
-        currentLoungeName" : "loungename"
+        currentLoungeName : "loungename"
     },
     14tgt4rngu : {
         ...
@@ -56,7 +56,7 @@ var JSON = {
         userId: "",
         streamURL: "",
         songName: "",
-        timestamp: "",
+        songTime: "",
         hostTime: "",
         songImage: "",
         currentLoungeId: "",
