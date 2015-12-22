@@ -23,7 +23,7 @@ ws.on('connection', ws => {
 
     // Listener to handle incoming client messages
     ws.on('message', message => {
-        console.log(`Received: ${JSON.stringify(data, null, 2)}`);
+        console.log(`Received: ${JSON.stringify(message, null, 2)}`);
         var data = JSON.parse(message.data);
         actions[message.action](data);
     });
