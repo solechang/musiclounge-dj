@@ -47,7 +47,7 @@ function requestHostInfo(ws, data) {
         action: "requestHostInfo",
         data: { }
     }
-    ws.send(JSON.stringify(message));
+    global.Lounges[data.hostId].socket.send(JSON.stringify(message));
 }
 
 // The host will send the lounge and current song information to the joiner
