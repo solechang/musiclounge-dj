@@ -14,7 +14,7 @@ ws.on('connection', ws => {
     console.log('Client connected to server!');
 
     ws.on('message', json => {
-        console.log(`Received message from the client: ${data}`);
+        console.log(`Received message from the client: ${json}`);
     });
 });
 
