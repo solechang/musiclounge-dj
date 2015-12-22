@@ -84,9 +84,11 @@ function error() {
 const actions = {
     hostLounge, 
     unhostLounge,
-    updateJoiner,
     joinLounge, 
-    leaveLounge,
+    requestHostInfo,
+    sendHostInfo,
+    processHostInfo,
+    leaveLounge
 }
 
 module.exports = actions
