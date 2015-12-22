@@ -14,9 +14,13 @@ app.use((req, res) => {
 
 // Declare the action handlers
 const actions = {
-    'hostLounge'    : listeners.hostLounge,
-    'joinLounge'    : listeners.joinLounge,
-    'error'         : listeners.error 
+    'hostLounge'    	: listeners.hostLounge,
+    'unhostLounge'  	: listeners.unhostLounge,
+    'joinLounge'    	: listeners.joinLounge,
+    'requestHostInfo'	: listeners.requestHostInfo,
+    'sendHostInfo'  	: listeners.sendHostInfo,
+    'processHostInfo'	: listeners.processHostInfo,
+    'leaveLounge'   	: listeners.leaveLounge,
 };
 
 // Instantiate listeners upon a socketServer connection 
