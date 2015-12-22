@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/wisupreme/MusicLounge-Server#readme",
   "dependencies": {
+    "express": "^4.13.3",
     "ws": "^0.8.1"
   }
 }
