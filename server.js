@@ -18,7 +18,7 @@ ws.on('connection', ws => {
     });
 });
 
-ws.on('disconnection', () => {
+ws.on('close', () => {
     console.log('Client disconnected from the server!');
 });
 
