@@ -41,7 +41,7 @@ function joinLounge(ws, data) {
 // Request information from the host necessary to play the lounge's current song
 function requestHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
-    console.log(`--> in requestHostInfo: ${JSON.stringify(data, null, 2)}`);
+    console.log(`--> in requestHostInfo`);
     
     var message = {
         action: "requestHostInfo",
@@ -65,7 +65,7 @@ function sendHostInfo(ws, data) {
 // Process the host lounge information to be able to start the song in sync on the joiner's end
 function processHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
-    console.log(`--> in processHostInfo: ${JSON.stringify(data, null, 2)}`);
+    console.log(`--> in processHostInfo`);
     ws.send(data);
 }
 
