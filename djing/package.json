@@ -1,0 +1,30 @@
+{
+  "name": "djing",
+  "version": "1.0.0",
+  "description": "Server endpoint to synchronize clients connected to a hosted music lounge.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wisupreme/MusicLounge-Server.git"
+  },
+  "keywords": [
+    "music-lounge",
+    "music",
+    "lounge",
+    "server",
+    "dj",
+    "djing"
+  ],
+  "author": "Andrew Kwon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wisupreme/MusicLounge-Server/issues"
+  },
+  "homepage": "https://github.com/wisupreme/MusicLounge-Server#readme",
+  "dependencies": {
+    "ws": "^0.8.1"
+  }
+}
