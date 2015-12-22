@@ -86,6 +86,25 @@ var JSON = {
 }
 ```
 
+##### Send Host Info (client → server)
+The host will send the lounge and current song information to the joiner
+```javascript
+var JSON = {
+    action: "sendHostInfo",
+    data: { 
+        hostName: "",
+        userId: "",
+        streamURL: "",
+        songName: "",
+        songTime: "",
+        hostTime: "",
+        songImage: "",
+        currentLoungeId: "",
+        currentLoungeName: ""
+    }
+}
+```
+
 ##### Request Host Info (server → client)
 Request information from the host necessary to play the lounge's current song
 ```javascript
@@ -118,6 +137,25 @@ var JSON = {
     data: {
         hostName: "",
         userId: ""
+    }
+}
+```
+
+##### Process Host Info (server → client)
+Process the host lounge information to be able to start the song in sync on the joiner's end
+```javascript
+var JSON = {
+    action: "processHostInfo",
+    data: {
+        hostName: "",
+        userId: "",
+        streamURL: "",
+        songName: "",
+        songTime: "",
+        hostTime: "",
+        songImage: "",
+        currentLoungeId: "",
+        currentLoungeName: ""
     }
 }
 ```
