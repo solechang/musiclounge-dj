@@ -2,7 +2,7 @@
 ---
 ## JSON Message Protocol (GENERAL)
 
-### Error (server ➢ client)
+### Error (server → client)
 ```javascript
 var JSON = {
     type: "error",
@@ -14,7 +14,7 @@ var JSON = {
 
 ## JSON Message Protocol (HOST)
 
-### Host a Lounge (client ➢ server)
+### Host a Lounge (client → server)
 ```javascript
 var JSON = {
     type: "hostLounge",
@@ -33,7 +33,7 @@ var JSON = {
 
 ## JSON Message Protocol (JOINER)
 
-### Join a Lounge (client ➢ server)
+### Join a Lounge (client → server)
 ```javascript
 var JSON = {
     type: "joinLounge",
