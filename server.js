@@ -22,10 +22,10 @@ ws.on('connection', ws => {
     console.log('Client connected to server!');
 
     // Listener to handle incoming client messages
-    ws.on('message', data => {
+    ws.on('message', message => {
         console.log(`Received: ${JSON.stringify(data, null, 2)}`);
-        var json = JSON.parse(message.data);
-        actions[json.action](json.data);
+        var data = JSON.parse(message.data);
+        actions[message.action](data);
     });
 
     // Listener to handle a client disconnection
