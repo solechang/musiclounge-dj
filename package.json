@@ -26,6 +26,11 @@
   "homepage": "https://github.com/wisupreme/MusicLounge-Server#readme",
   "dependencies": {
     "express": "^4.13.3",
-    "ws": "^0.8.1"
+    "ws": "^0.8.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "file:node_modules/babelify",
+    "browserify": "file:node_modules/browserify",
+    "gulp": "^3.9.0",
+    "vinyl-source-stream": "file:node_modules/vinyl-source-stream"
   }
 }
