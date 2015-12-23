@@ -1,0 +1,1 @@
+browserify ../server.js --outfile bundle.js --node && scp root@45.55.22.191:bundle.js /root/MusicLounge-DJ/dist
