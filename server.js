@@ -21,6 +21,9 @@ const actions = {
     'sendHostInfo'  	: listeners.sendHostInfo,
     'processHostInfo'	: listeners.processHostInfo,
     'leaveLounge'   	: listeners.leaveLounge,
+    'changeSong'   	: listeners.changeSong,
+    'joinerReady'       : listeners.joinerReady,
+    'sendHostSongTime'  : listeners.sendHostSongTime
 };
 
 // Instantiate listeners upon a socketServer connection 
