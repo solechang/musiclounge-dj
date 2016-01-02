@@ -4,7 +4,7 @@
   "description": "Server endpoint to synchronize clients connected to a hosted music lounge.",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js"
+    "test": "cd dist && ./dj"
   },
   "repository": {
     "type": "git",
