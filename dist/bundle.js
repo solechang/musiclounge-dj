@@ -28,8 +28,13 @@ function unhostLounge(ws, data) {
         data: { }
     };
 
+    // Gather all ids joined in a music lounge
+    var joinerIds = [];
+    for(var id in global.Lounges[data.userId].clientIds)
+        joinerIds.push(id);
+        
     // Broadcast the message to all joiners and remove the host from the list of lounges
-    broadcast(global.Lounges[data.userId].clientIds, message);
+    broadcast(data.userId, joinerIds, message);
     delete global.Lounges[data.userId];
 
     console.dir(global.Lounges);
@@ -88,10 +93,10 @@ function requestHostInfo(ws, data) {
 function sendHostInfo(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log('--> in sendHostInfo');
-    console.dir(global.Lounges);
+    console.dir(global.Lounges[data.userId].clientIds);
 
     var json = {
-        action: "sendHostInfo",
+        action: "processHostInfo",
         data: data
     }
     processHostInfo(ws, json);
@@ -122,15 +127,75 @@ function leaveLounge(ws, data) {
     console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
     console.log('--> in leaveLounge');
 
-    delete global.Lounges[data.hostId].clientIds[data.userId];
+    if(global.Lounges[data.hostId])
+        delete global.Lounges[data.hostId].clientIds[data.userId];
+    
     console.dir(global.Lounges);
+}
+
+// Broadcast to all listeners that when the DJ plays or pauses a song
+function changeSong(ws, data) {
+    console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
+    console.log('--> in changeSong');
+
+    // Construct a message to broadcast to all client to update their songs
+    var message = {
+        action: "updateClients",
+        data: data
+    }
+    
+    // Gather all ids joined in a music lounge
+    var clientIds = [];
+    for(var id in global.Lounges[data.userId].clientIds)
+        clientIds.push(id);
+     
+    // Broadcast to all clients 
+    broadcast(data.hostId, clientIds, message);
+}
+
+function joinerReady(ws, data) {
+    console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
+    console.log('--> in joinerReady');
+
+    // Construct a message to send to the DJ to request the updated song time
+    var message = {
+        action: "requestSongTime",
+        data: data
+    }
+
+    global.Lounges[data.hostId].socket.send(JSON.stringify(message));
+}
+
+function sendHostSongTime(ws, data) {
+    console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
+    console.log('--> in sendHostSongTime');
+
+    // Construct a message to send to the DJ to request the updated song time
+    var message = {
+        action: "joinerStartSong",
+        data: data
+    }
+
+    if(global.Lounges[data.hostId]) {
+        global.Lounges[data.hostId].clientIds[data.joinerId].socket.send(JSON.stringify(message));
+    } else {
+        console.log(`Unable to process host information! Invalid host ID: ${data.hostId}`);
+        ws.send(JSON.stringify({
+            action: "error",
+            data: {
+                errantAction: "processHostInfo",
+                message: "Unable to process host information! Invalid host ID: "+data.hostId
+            }
+        }));
+        return;
+    }
 }
 
 // Auxiliary functions
 //
 // Broadcast to sockets keyed by user ids
-function broadcast(ids, data) {
-    ids.forEach(id => global.Lounges[id].socket.send(data));
+function broadcast(hostId, ids, data) {
+    ids.forEach(id => global.Lounges[hostId].clientIds[id].socket.send(JSON.stringify(data)));
 }
 
 // Constant object for export
@@ -141,7 +206,10 @@ const actions = {
     requestHostInfo,
     sendHostInfo,
     processHostInfo,
-    leaveLounge
+    leaveLounge,
+    changeSong,
+    joinerReady,
+    sendHostSongTime 
 }
 
 module.exports = actions
@@ -22350,6 +22418,9 @@ const actions = {
     'sendHostInfo'  	: listeners.sendHostInfo,
     'processHostInfo'	: listeners.processHostInfo,
     'leaveLounge'   	: listeners.leaveLounge,
+    'changeSong'   	: listeners.changeSong,
+    'joinerReady'       : listeners.joinerReady,
+    'sendHostSongTime'  : listeners.sendHostSongTime
 };
 
 // Instantiate listeners upon a socketServer connection 
