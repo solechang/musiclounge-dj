@@ -161,3 +161,31 @@ var JSON = {
 	data: { }
 }
 ```
+
+## DJ Control Protocol (Play/Pause/Previous/Next/Seek)
+![alt text](http://i66.tinypic.com/zwym3d.png)
+##### Change Song (client → server)
+Broadcast to all listeners that when the DJ plays or pauses a song
+```javascript
+var JSON = {
+	action: "changeSong",
+	data: {
+		hostId: "",
+		control: "play" | "pause" | "next" | "previous" | "seek",
+		[ necessary music data ]
+	}
+}
+```
+
+##### Update Clients (server → client)
+Broadcast to all listeners that when the DJ plays or pauses a song
+```javascript
+var JSON = {
+	action: "updateClients",
+	data: {
+		hostId: "",
+		control: "play" | "pause" | "next" | "previous" | "seek",
+		[ necessary music data ]
+	}
+}
+```
